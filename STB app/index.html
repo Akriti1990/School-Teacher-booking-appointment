@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8" />
+  <title>Student–Teacher Booking • Sign in / Register</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A modern, fast, and smart app to book, approve, and manage student–teacher appointments." />
+  <meta name="theme-color" content="#0ea5e9" id="themeColor">
+
+  <!-- Icons / Manifest (PWA ready) -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+  <!-- Fonts (modern, variable) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="preload" href="./style.css" as="style">
+  <link rel="stylesheet" href="./style.css">
+  <script>
+    // Remove no-js & apply saved theme before paint
+    document.documentElement.classList.remove('no-js');
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+  </script>
+</head>
+
+<body class="app app--auth">
+  <!-- Background decoration -->
+  <div class="bg-decor" aria-hidden="true">
+    <span class="glow glow--1"></span>
+    <span class="glow glow--2"></span>
+    <span class="mesh"></span>
+  </div>
+
+  <main class="shell">
+    <section class="card card--xl">
+      <header class="card__header header">
+        <div class="brand">
+          <div class="brand__mark" aria-hidden="true">ST</div>
+          <div class="brand__copy">
+            <h1 class="brand__title">Student–Teacher Booking</h1>
+            <p class="brand__subtitle">Plan smarter. Meet faster.</p>
+          </div>
+        </div>
+
+        <div class="header__actions">
+          <button id="themeToggle" class="icon-btn" aria-label="Toggle dark mode" title="Toggle theme">
+            <span class="icon-sun" aria-hidden="true"></span>
+          </button>
+          <a class="text-btn" href="./dashboard.html" aria-label="Skip to dashboard if already signed in">Skip</a>
+        </div>
+      </header>
+
+      <div class="card__body grid grid--2">
+        <!-- Left: Feature pitch -->
+        <aside class="hero">
+          <h2 class="hero__title">Less friction, more learning</h2>
+          <ul class="list list--features">
+            <li>🌟 Stay organized — no more chasing teachers in hallways</li>
+            <li>📚 Focus on learning, not on scheduling headaches</li>
+            <li>🤝 Build stronger connections between students & mentors</li>
+            <li>🚀 Save time with a simple, modern booking experience</li>
+            <li>💡 Designed for students, trusted by teachers</li>
+            <li>✨ Fast, secure, and always accessible — anywhere, anytime</li>
+          </ul>
+
+
+          <div class="stats">
+            <div class="stat">
+              <span class="stat__num" aria-label="Median booking time under 60 seconds">≈60s</span>
+              <span class="stat__label">to book</span>
+            </div>
+            <div class="stat">
+              <span class="stat__num">99.9%</span>
+              <span class="stat__label">reliability</span>
+            </div>
+            <div class="stat">
+              <span class="stat__num">3×</span>
+              <span class="stat__label">faster approvals</span>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Right: Auth Panel -->
+        <section class="auth" aria-labelledby="authTabs">
+          <nav id="authTabs" class="tabs" role="tablist" aria-label="Authentication">
+            <button class="tab is-active" role="tab" aria-selected="true" aria-controls="panel-login" id="tab-login" data-tab="login">Login</button>
+            <button class="tab" role="tab" aria-selected="false" aria-controls="panel-register" id="tab-register" data-tab="register">Register</button>
+          </nav>
+
+          <!-- Login Panel -->
+          <form id="panel-login" class="panel is-active" role="tabpanel" aria-labelledby="tab-login" autocomplete="on">
+            <div class="field">
+              <label for="loginEmail">Email</label>
+              <input type="email" id="loginEmail" name="email" placeholder="you@college.edu" required />
+            </div>
+
+            <div class="field field--password">
+              <label for="loginPassword">Password</label>
+              <input type="password" id="loginPassword" name="password" placeholder="••••••••" minlength="6" required />
+              <button class="field__toggle" type="button" data-toggle="loginPassword" aria-label="Show password"></button>
+            </div>
+
+            <div class="row row--between">
+              <label class="checkbox">
+                <input type="checkbox" id="rememberMe"> <span>Remember me</span>
+              </label>
+              <a href="#" class="link" id="forgotPasswordLink">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="btn btn--primary" id="loginBtn">Sign in</button>
+
+            <div class="oauth">
+              <button type="button" class="btn btn--ghost" id="btnGoogle">
+                <span class="icon-google" aria-hidden="true"></span> Continue with Google
+              </button>
+            </div>
+
+            <p class="muted">By continuing you agree to our <a class="link" href="#" aria-disabled="true">Terms</a> & <a class="link" href="#" aria-disabled="true">Privacy</a>.</p>
+          </form>
+
+          <!-- Register Panel -->
+          <form id="panel-register" class="panel" role="tabpanel" aria-labelledby="tab-register" autocomplete="on">
+            <div class="grid grid--2 grid--gap">
+              <div class="field">
+                <label for="regName">Full name</label>
+                <input type="text" id="regName" name="name" placeholder="Alex Johnson" required />
+              </div>
+              <div class="field">
+                <label for="regRole">Role</label>
+                <select id="regRole" name="role" required>
+                  <option value="student" selected>Student</option>
+                  <option value="teacher">Teacher</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid--2 grid--gap">
+              <div class="field">
+                <label for="regDept">Department (optional)</label>
+                <input type="text" id="regDept" name="department" placeholder="CSE / ECE / Math" />
+              </div>
+              <div class="field">
+                <label for="regSubject">Subject (optional)</label>
+                <input type="text" id="regSubject" name="subject" placeholder="Algorithms, Physics…" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="regEmail">Email</label>
+              <input type="email" id="regEmail" name="email" placeholder="you@college.edu" required />
+            </div>
+
+            <div class="grid grid--2 grid--gap">
+              <div class="field field--password">
+                <label for="regPassword">Password</label>
+                <input type="password" id="regPassword" name="password" placeholder="Minimum 6 characters" minlength="6" required />
+                <button class="field__toggle" type="button" data-toggle="regPassword" aria-label="Show password"></button>
+                <div class="meter" aria-live="polite">
+                  <div class="meter__bar" id="pwMeter"></div>
+                  <span class="meter__label" id="pwLabel">Strength: —</span>
+                </div>
+              </div>
+              <div class="field field--password">
+                <label for="regPassword2">Confirm password</label>
+                <input type="password" id="regPassword2" name="password2" minlength="6" required />
+                <button class="field__toggle" type="button" data-toggle="regPassword2" aria-label="Show password"></button>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn--primary" id="registerBtn">Create account</button>
+          </form>
+
+          <!-- Toasts -->
+          <div id="toast" role="status" aria-live="polite" class="toast" hidden></div>
+        </section>
+      </div>
+
+      <footer class="card__footer footer">
+        <p class="muted">© <span id="year"></span> Student–Teacher Booking • Built with ♥</p>
+      </footer>
+    </section>
+  </main>
+
+  <!-- Light JS for UI only -->
+  <script>
+    // Tabs
+    const tabs = document.querySelectorAll('.tab');
+    const panels = document.querySelectorAll('.panel');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('is-active'));
+        panels.forEach(p => p.classList.remove('is-active'));
+        tab.classList.add('is-active');
+        document.getElementById(`panel-${tab.dataset.tab}`).classList.add('is-active');
+      });
+    });
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Toast helper
+    const toastEl = document.getElementById('toast');
+    window.showToast = (msg, type = 'info') => {
+      toastEl.textContent = msg;
+      toastEl.dataset.type = type;
+      toastEl.hidden = false;
+      clearTimeout(window.__t);
+      window.__t = setTimeout(() => (toastEl.hidden = true), 3000);
+    };
+
+    // Password reveal toggles
+    document.querySelectorAll('.field__toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-toggle');
+        const input = document.getElementById(id);
+        const isPwd = input.type === 'password';
+        input.type = isPwd ? 'text' : 'password';
+        btn.setAttribute('aria-label', isPwd ? 'Hide password' : 'Show password');
+        btn.classList.toggle('is-on', isPwd);
+      });
+    });
+
+    // Simple password strength meter
+    const pw = document.getElementById('regPassword');
+    const pwBar = document.getElementById('pwMeter');
+    const pwLabel = document.getElementById('pwLabel');
+    function scorePassword(v) {
+      let score = 0;
+      if (!v) return 0;
+      // length, variety, uncommon patterns
+      const sets = [/[^A-Za-z0-9]/, /[0-9]/, /[a-z]/, /[A-Z]/];
+      score += Math.min(4, Math.floor(v.length / 3));
+      sets.forEach(re => { if (re.test(v)) score += 2; });
+      return Math.min(10, score);
+    }
+    function renderMeter(score) {
+      const pct = (score / 10) * 100;
+      pwBar.style.width = pct + '%';
+      let label = 'Weak';
+      if (score >= 8) label = 'Strong';
+      else if (score >= 5) label = 'Good';
+      pwLabel.textContent = 'Strength: ' + label;
+      pwBar.dataset.level = label.toLowerCase();
+    }
+    pw?.addEventListener('input', e => renderMeter(scorePassword(e.target.value)));
+
+    // Theme toggle
+    const themeBtn = document.getElementById('themeToggle');
+    themeBtn.addEventListener('click', () => {
+      const root = document.documentElement;
+      const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      root.dataset.theme = next;
+      localStorage.setItem('theme', next);
+      document.getElementById('themeColor').setAttribute('content', next === 'dark' ? '#0b1220' : '#0ea5e9');
+    });
+
+    // Register service worker (PWA)
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(console.warn);
+    }
+  </script>
+
+  <!-- App (Firebase config + handlers) -->
+  <script type="module" src="./firebase_config.js"></script>
+  <script type="module" src="./script.js"></script>
+</body>
+</html>

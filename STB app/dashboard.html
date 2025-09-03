@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Dashboard • Student–Teacher Booking</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body class="app app--dashboard">
+  <main class="shell dashboard">
+    
+    <!-- Header -->
+    <header class="dash-header">
+      <div class="brand">
+        <div class="brand__mark">ST</div>
+        <h1>Dashboard</h1>
+      </div>
+      <div class="dash-actions">
+        <button id="newBookingBtn" class="btn btn--primary">+ New Booking</button>
+        <button id="logoutBtn" class="btn btn--ghost">Logout</button>
+      </div>
+    </header>
+
+    <!-- Appointments -->
+    <section>
+      <h2>📅 Your Appointments</h2>
+      <div id="appointmentsList">
+        <p class="muted">Loading appointments…</p>
+      </div>
+    </section>
+
+    <!-- Booking Modal (Student only) -->
+    <dialog id="bookingModal" class="modal">
+      <form method="dialog" id="bookingForm" class="modal__content">
+        <h3>📅 Book an Appointment</h3>
+
+        <div class="field">
+          <label for="teacherEmail">Teacher Email</label>
+          <input type="email" id="teacherEmail" placeholder="teacher@college.edu" required />
+        </div>
+
+        <div class="field">
+          <label for="date">Date</label>
+          <input type="date" id="date" required />
+        </div>
+
+        <div class="field">
+          <label for="time">Time</label>
+          <input type="time" id="time" required />
+        </div>
+
+        <menu class="modal__actions">
+          <button type="button" class="btn btn--ghost" onclick="bookingModal.close()">Cancel</button>
+          <button type="submit" class="btn btn--primary">Confirm Booking</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <!-- Footer -->
+    <footer class="card__footer">
+      <p class="muted">© <span id="year"></span> Student–Teacher Booking • Dashboard</p>
+    </footer>
+  </main>
+  
+   <!-- Toast -->
+   <div id="toast" role="status" aria-live="polite" class="toast" hidden></div>
+
+  <!-- Scripts -->
+  <script type="module" src="./dashboard.js"></script>
+</body>
+</html>

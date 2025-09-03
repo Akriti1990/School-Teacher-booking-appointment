@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Appointments • Student–Teacher Booking</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body class="app app--appointments">
+  <main class="shell dashboard">
+    <!-- Header -->
+    <header class="dash-header">
+      <div class="brand">
+        <div class="brand__mark">ST</div>
+        <h1>Appointments</h1>
+      </div>
+      <button id="backBtn" class="btn btn--ghost">← Back to Dashboard</button>
+      <button id="logoutBtn" class="btn btn--ghost">Logout</button>
+    </header>
+
+    <h2>Your Appointments 📅</h2>
+
+    <!-- Appointment List -->
+    <section id="appointmentsContainer">
+      <p class="muted">Loading appointments…</p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="card__footer">
+      <p class="muted">© <span id="year"></span> Student–Teacher Booking • Appointments</p>
+    </footer>
+  </main>
+
+  <!-- Scripts -->
+  <script type="module" src="./appointments.js"></script>
+</body>
+</html>
